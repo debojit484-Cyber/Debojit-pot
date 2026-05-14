@@ -444,6 +444,156 @@ themeBtn.addEventListener('click', () => {
 </script>
 
 </body>
+</html>
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+  Debo<span>jit</span>
+</div>
+
+<ul class="nav-links">
+  <li><a href="#projects">Projects</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="theme-btn" id="themeBtn"></button>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="hero-tag">
+Developer • Creator • Designer
+</div>
+
+<h1>
+Hi, I'm <span>Debojit</span>
+</h1>
+
+<p>
+Building modern web experiences with HTML, CSS & JavaScript while exploring AI, design and digital creativity.
+</p>
+
+<div class="hero-buttons">
+  <a href="#projects" class="btn btn-primary">View Projects</a>
+  <a href="#contact" class="btn btn-outline">Contact Me</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<h2 class="section-title">
+Featured <span>Projects</span>
+</h2>
+
+<div class="projects">
+
+<div class="card">
+<div class="card-tag">Web Development</div>
+<h3>Portfolio Website</h3>
+<p>
+A futuristic personal portfolio website with responsive design and smooth animations.
+</p>
+
+<div class="tech">
+<span>HTML</span>
+<span>CSS</span>
+<span>JavaScript</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-tag">Content Creation</div>
+<h3>Creative Content</h3>
+<p>
+Digital content, visual storytelling and AI-assisted design work for social platforms.
+</p>
+
+<div class="tech">
+<span>Canva</span>
+<span>AI Tools</span>
+<span>Writing</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-tag">Design</div>
+<h3>UI Experiments</h3>
+<p>
+Clean futuristic interface concepts inspired by gaming and modern web aesthetics.
+</p>
+
+<div class="tech">
+<span>UI/UX</span>
+<span>Figma</span>
+<span>CSS</span>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="contact-box">
+
+<h2 class="section-title">
+Let's <span>Connect</span>
+</h2>
+
+<p>
+Open for collaborations, freelance work and creative projects.
+</p>
+
+<a href="mailto:debojit@example.com" class="email">
+debojit@example.com
+</a>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Debojit — Designed & Built with Passion.
+</footer>
+
+<script>
+
+const themeBtn = document.getElementById('themeBtn');
+
+themeBtn.addEventListener('click', () => {
+
+  const html = document.documentElement;
+
+  if(html.getAttribute('data-theme') === 'dark'){
+    html.setAttribute('data-theme','light');
+  } else {
+    html.setAttribute('data-theme','dark');
+  }
+
+});
+
+</script>
+
+</body>
 </html>  --border:    rgba(249,89,89,0.25);
   --card-bg:   rgba(255,255,255,0.75);
   --pill-bg:   rgba(249,89,89,0.08);

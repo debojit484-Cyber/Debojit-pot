@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debojit — Developer & Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0a0f; --bg2: #111118; --bg3: #1a1a24;
+    --accent: #7c6eff; --accent2: #ff6e7c; --accent3: #6effc8;
+    --text: #f0eefc; --muted: #8886a8; --border: rgba(124,110,255,0.18);
+    --card-bg: rgba(26,26,36,0.7);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; line-height: 1.6; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 6%;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 6% 4rem; position: relative; overflow: hidden; }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(124,110,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(124,110,255,0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(124,110,255,0.14) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -60%); pointer-events: none; }
+  .hero-content { position: relative; max-width: 820px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 100px;
+    margin-bottom: 1.8rem; background: rgba(124,110,255,0.08);
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  .hero h1 .role { display: block; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-block; padding: 0.8rem 2rem; background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 6px; transition: opacity 0.2s, transform 0.2s; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+  .btn-outline { display: inline-block; padding: 0.8rem 2rem; border: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.06em; text-decoration: none; border-radius: 6px; transition: border-color 0.2s, transform 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  section { padding: 6rem 6%; border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .section-title span { color: var(--accent); }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.9; }
+  .about-text p strong { color: var(--text); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .stat-box { background: var(--bg2); padding: 1.8rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+  .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.2s; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-tag { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent3); margin-bottom: 0.8rem; }
+  .project-card h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: -0.01em; }
+  .project-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tech-pill { font-size: 0.68rem; padding: 0.25rem 0.7rem; border: 1px solid var(--border); border-radius: 100px; color: var(--muted); letter-spacing: 0.06em; }
+  .project-link { font-size: 0.78rem; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+  .project-link:hover { gap: 0.7rem; }
+
+  .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skill-group { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .skill-group-title { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem; }
+  .skill-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .skill-name { font-size: 0.85rem; color: var(--text); }
+  .skill-bar-wrap { width: 80px; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+  .skill-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform-origin: left; animation: barIn 1.2s cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes barIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  .contact-inner { max-width: 640px; }
+  .contact-inner p { color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-size: 0.82rem; background: var(--card-bg); transition: border-color 0.2s, transform 0.2s; }
+  .contact-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  footer { padding: 2rem 6%; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; gap: 1rem; }
+
+  .fade-up { opacity: 0; transform: translateY(28px); animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+  .d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.18s; } .d3 { animation-delay: 0.3s; } .d4 { animation-delay: 0.45s; }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><span>&lt;</span>Debojit<span>/&gt;</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up d1">Open to collaboration</div>
+    <h1 class="fade-up d2">
+      Hi, I'm Debojit.
+      <span class="role">Developer &amp;<br>Content Creator</span>
+    </h1>
+    <p class="hero-desc fade-up d3">
+      Based in Coochbehar, West Bengal — building web experiences with HTML, CSS &amp; JavaScript,
+      creating content, and exploring where AI meets creativity.
+    </p>
+    <div class="hero-cta fade-up d4">
+      <a href="#projects" class="btn-primary">See My Work →</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">// 01 — about</div>
+  <h2 class="section-title">Who I <span>Am</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong>Debojit</strong>, currently pursuing a <strong>B.A. Honours</strong> from <strong>Surya Mahavidyalaya</strong>, Coochbehar. While studying, I've been carving my own path in tech and creativity.</p>
+      <p>I build websites using <strong>HTML, CSS &amp; JavaScript</strong>, deploy on <strong>Vercel</strong>, and manage code with <strong>GitHub</strong>. I love that moment when something I built goes live.</p>
+      <p>Beyond code, I'm a <strong>content creator and writer</strong> — crafting ideas into words and visuals. I use <strong>AI tools and Canva</strong> for photo editing, and Excel for data work.</p>
+      <p>Always learning. Always building. Deeply curious about where <strong>web development meets AI</strong>.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Coding languages</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Curiosity level</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Self-motivated</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">WB</span>
+        <span class="stat-label">Based in India</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">// 02 — projects</div>
+  <h2 class="section-title">My <span>Work</span></h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-tag">Web Dev</div>
+      <h3>College Project Site</h3>
+      <p>A fully functional website built for my college, deployed live on Vercel with version control via GitHub. Clean UI, responsive layout.</p>
+      <div class="project-tech">
+        <span class="tech-pill">HTML</span>
+        <span class="tech-pill">CSS</span>
+        <span class="tech-pill">JavaScript</span>
+        <span class="tech-pill">Vercel</span>
+        <span class="tech-pill">GitHub</span>
+      </div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Content</div>
+      <h3>Creative Writing &amp; Content</h3>
+      <p>Articles, posts, and creative pieces. My B.A. background meets my digital presence — words crafted to engage and inform audiences.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Content Writing</span>
+        <span class="tech-pill">Copywriting</span>
+        <span class="tech-pill">Storytelling</span>
+      </div>
+      <a href="#" class="project-link">Read More →</a>
+    </div>
+    <div class="project-card">
+      <div class="project-tag">Design &amp; AI</div>
+      <h3>AI-Powered Visuals</h3>
+      <p>Visual content created with Canva and AI photo editing tools — from social graphics to polished images for digital platforms.</p>
+      <div class="project-tech">
+        <span class="tech-pill">Canva</span>
+        <span class="tech-pill">AI Editing</span>
+        <span class="tech-pill">Photo Design</span>
+      </div>
+      <a href="#" class="project-link">View Gallery →</a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">// 03 — skills</div>
+  <h2 class="section-title">What I <span>Know</span></h2>
+  <div class="skills-wrapper">
+    <div class="skill-group">
+      <div class="skill-group-title">Web Development</div>
+      <div class="skill-item"><span class="skill-name">HTML</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%;animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">CSS</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%;animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:60%;animation-delay:0.3s"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools &amp; Platforms</div>
+      <div class="skill-item"><span class="skill-name">GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%;animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Vercel</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%;animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Excel</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%;animation-delay:0.3s"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Creative</div>
+      <div class="skill-item"><span class="skill-name">Canva</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%;animation-delay:0.1s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">AI Editing</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%;animation-delay:0.2s"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Content Writing</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%;animation-delay:0.3s"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// 04 — contact</div>
+  <h2 class="section-title">Let's <span>Connect</span></h2>
+  <div class="contact-inner">
+    <p>I'm always open to new projects, collaborations, or just a good conversation about tech, content, and AI. Whether you need a web developer, content writer, or a curious mind to work with — reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-link">✉ Email Me</a>
+      <a href="https://github.com/" target="_blank" class="contact-link">⌥ GitHub</a>
+      <a href="https://linkedin.com/" target="_blank" class="contact-link">in LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Debojit — Built with HTML, CSS &amp; JS</span>
+  <span style="color: var(--accent);">Coochbehar, West Bengal 🇮🇳</span>
+</footer>
+
+</body>
+</html>
